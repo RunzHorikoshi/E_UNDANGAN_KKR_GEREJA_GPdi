@@ -675,7 +675,7 @@
     </div>
     <div class="form-group">
       <label for="gereja">Jemaat / Gereja Asal</label>
-      <select id="gereja">
+      <select id="gereja" onchange="toggleGerejaLain(this)">
   <option value="">— Pilih gereja asal —</option>
   <option value="KGBI MENTONYEK PROYEK">KGBI MENTONYEK PROYEK</option>
   <option value="KGBI MENTONYEK DALAM">KGBI MENTONYEK DALAM</option>
@@ -686,6 +686,7 @@
   <option value="Lainnya">Lainnya (ketik sendiri)</option>
 </select>
 <input type="text" id="gereja-lain" placeholder="Tulis nama gereja..." style="display:none;margin-top:0.5rem">
+<span class="error-text" id="err-gereja">Gereja asal wajib dipilih</span>
     </div>
     <button class="btn-primary" id="btn-daftar" onclick="submitForm()">Konfirmasi Kehadiran</button>
   </div>
@@ -820,11 +821,20 @@
     document.getElementById(id).style.display = show ? 'block' : 'none';
   }
 
+  // ---- toggle gereja lain ----
+  window.toggleGerejaLain = function(sel) {
+    const input = document.getElementById('gereja-lain');
+    input.style.display = sel.value === 'Lainnya' ? 'block' : 'none';
+    if (sel.value !== 'Lainnya') input.value = '';
+  };
+
   // ---- submit form ----
   window.submitForm = async function() {
     const nama = document.getElementById('nama').value.trim();
     const kelamin = document.getElementById('kelamin').value;
-    const gereja = document.getElementById('gereja').value.trim();
+    const gerejaSelect = document.getElementById('gereja').value;
+    const gerejaLain = document.getElementById('gereja-lain').value.trim();
+    const gereja = gerejaSelect === 'Lainnya' ? gerejaLain : gerejaSelect;
 
     let valid = true;
     if (!nama) { showError('err-nama', true); valid = false; } else showError('err-nama', false);
