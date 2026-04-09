@@ -617,20 +617,6 @@
 </head>
 <body>
 
-  <h2>Isi Data</h2>
-
-  <input id="nama" placeholder="Nama">
-  <input id="gereja" placeholder="Asal Gereja">
-
-  <select id="gender">
-    <option value="Laki-laki">Laki-laki</option>
-    <option value="Perempuan">Perempuan</option>
-  </select>
-
-  <button onclick="kirimData()">Kirim</button>
-
-</body>
-
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="cross-deco"></div>
@@ -797,12 +783,12 @@
   // GANTI dengan config Firebase project lu
   // ============================================================
   const firebaseConfig = {
-    apiKey: "GANTI_API_KEY",
-    authDomain: "GANTI.firebaseapp.com",
-    projectId: "GANTI_PROJECT_ID",
-    storageBucket: "GANTI.appspot.com",
-    messagingSenderId: "GANTI",
-    appId: "GANTI"
+    apiKey: "AIzaSyDHvOiGpEGaT8LH68djkDdEknxuMxXZbRQ",
+    authDomain: "undangan-gereja-gpdi.firebaseapp.com",
+    projectId: "undangan-gereja-gpdi",
+    storageBucket: "undangan-gereja-gpdi.firebasestorage.app",
+    messagingSenderId: "993389849122",
+    appId: "1:993389849122:web:b0a07769a4d49ea65df87b"
   };
   // ============================================================
 
@@ -930,40 +916,6 @@
   }
 </script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDHvOiGpEGaT8LH68djkDdEknxuMxXZbRQ",
-    authDomain: "undangan-gereja-gpdi.firebaseapp.com",
-    projectId: "undangan-gereja-gpdi",
-    storageBucket: "undangan-gereja-gpdi.firebasestorage.app",
-    messagingSenderId: "993389849122",
-    appId: "1:993389849122:web:6b21473c6d608d7b5df87b"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  window.kirimData = async function () {
-    const nama = document.getElementById("nama").value;
-    const gereja = document.getElementById("gereja").value;
-    const gender = document.getElementById("gender").value;
-
-    try {
-      await addDoc(collection(db, "jemaat"), {
-        nama,
-        gereja,
-        gender,
-        waktu: new Date()
-      });
-
-      alert("Data berhasil dikirim 🔥");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-</script>
 </body>
 </html>
